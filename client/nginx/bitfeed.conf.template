@@ -1,0 +1,43 @@
+map $sent_http_content_type $expires {
+    default                 off;
+    text/css                max;
+    text/json               max;
+    application/javascript  max;
+}
+
+server {
+    listen 80;
+
+    root /var/www/bitfeed;
+    index index.html;
+
+    server_name client;
+
+    location ~* \.(html)$ {
+            add_header Cache-Control 'no-cache';
+    }
+
+    location /api {
+            proxy_pass http://wsmonobackend;
+            proxy_set_header        Host $http_host;
+            proxy_set_header        X-Real-IP $remote_addr;
+    }
+
+    location /ws/txs {
+            proxy_pass      http://wsmonobackend;
+            proxy_http_version      1.1;
+            proxy_set_header        Upgrade $http_upgrade;
+            proxy_set_header        Connection "upgrade";
+            proxy_set_header        Host $http_host;
+            proxy_set_header        X-Real-IP $remote_addr;
+    }
+
+    location / {
+            try_files $uri $uri/ /index.html;
+            expires $expires;
+    }
+}
+
+upstream wsmonobackend {
+    server ${BACKEND_HOST}:${BACKEND_PORT};
+}
