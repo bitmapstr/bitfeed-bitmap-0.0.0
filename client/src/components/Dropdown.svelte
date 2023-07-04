@@ -40,7 +40,6 @@
 </script>
 
 <h2>My bitmaps</h2>
-<!-- <button id="getMyBitmaps" on:click={getMyBitmaps} > Get Bitmaps </button> -->
 
 <form on:submit|preventDefault={handleSubmit}>
 

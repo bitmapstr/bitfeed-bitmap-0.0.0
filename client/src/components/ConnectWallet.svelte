@@ -4,10 +4,12 @@
 
     let wallet = { connected: false };
 
+    function toggle() {
+        wallet.connected = !wallet.connected;
+    }
+
     export async function ConnectWallet() {
         // UniSat Wallet
-        wallet.connected = !wallet.connected;
-        let winuni = window.unisat;
         if (typeof winuni !== "undefined") {
             try {
                 if (wallet.connected) {
@@ -29,22 +31,28 @@
 
         return wallet;
     }
-
     $: wallet.connected = wallet.connected;
+    $: accounts = accounts
 </script>
-<div class="inner-content">
+<slot>
+
 {#if wallet.connected}
-    
-    <button class="danger" on:click={ConnectWallet}> Disconnect Wallet </button>
+    <button class="danger" on:click={toggle}> Disconnect Wallet </button>
+    <!-- <p>connected with {accounts}</p> -->
     <Dropdown />
+
    
 {/if}
 {#if !wallet.connected}
-    <button class="primary" on:click={ConnectWallet}> Connect Wallet </button>
-    
+    <button class="primary" on:click={toggle}> Connect Wallet </button>
+    <br>
+    <button>UniSat</button>
+    <br>
+    <button>Hiro</button>
+    <br>
+    <button>Xverse</button>
 {/if}
-</div>
-
+</slot>
 
 <style>
     .primary {
