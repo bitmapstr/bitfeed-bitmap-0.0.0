@@ -1,6 +1,6 @@
 <script>
     import { blockVisible } from "../stores";
-import Dropdown from "./Dropdown.svelte";
+    import Dropdown from "./Dropdown.svelte";
 
     let wallet = { connected: false };
 
@@ -32,18 +32,19 @@ import Dropdown from "./Dropdown.svelte";
 
     $: wallet.connected = wallet.connected;
 </script>
-
+<div class="inner-content">
 {#if wallet.connected}
     
     <button class="danger" on:click={ConnectWallet}> Disconnect Wallet </button>
-    <Dropdown></Dropdown>
+    <Dropdown />
    
 {/if}
-
 {#if !wallet.connected}
     <button class="primary" on:click={ConnectWallet}> Connect Wallet </button>
     
 {/if}
+</div>
+
 
 <style>
     .primary {

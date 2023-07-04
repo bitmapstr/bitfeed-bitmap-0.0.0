@@ -38,9 +38,8 @@
 	let bitmapNum = "";
 	
 </script>
-<br>
-<h2>My bitmaps</h2>
 
+<h2>My bitmaps</h2>
 <!-- <button id="getMyBitmaps" on:click={getMyBitmaps} > Get Bitmaps </button> -->
 
 <form on:submit|preventDefault={handleSubmit}>
