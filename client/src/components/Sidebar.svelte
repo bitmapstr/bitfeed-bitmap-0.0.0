@@ -16,6 +16,7 @@ import gridIcon from '../assets/icon/grid-icon.svg'
 import peopleIcon from '../assets/icon/cil-people.svg'
 import giftIcon from '../assets/icon/cil-gift.svg'
 import bookmarkIcon from '../assets/icon/cil-bookmark.svg'
+import bitmapIcon from '../assets/icon/cil-bitfeed-ostrich.svg'
 import MempoolLegend from '../components/MempoolLegend.svelte'
 import ContactTab from '../components/ContactTab.svelte'
 import SearchTab from '../components/SearchTab.svelte'
@@ -23,6 +24,7 @@ import SearchTab from '../components/SearchTab.svelte'
 import { sidebarToggle, overlay, currentBlock, blockVisible, haveSupporters, freezeResize } from '../stores.js'
     import Dropdown from './Dropdown.svelte';
     import ConnectWallet from './ConnectWallet.svelte';
+    import GetAllBitmaps from './AllBitmaps.svelte';
 
 let searchTabComponent
 
@@ -142,12 +144,12 @@ function showBlock () {
   </SidebarTab>
   <SidebarTab open={$sidebarToggle === 'bitmaps'} on:click={() => {settings('bitmaps')}} tooltip="Bitmaps">
     <span slot="tab" title="Bitmaps">
-      <Icon icon={bookmarkIcon} color="var(--bold-a)" />
+      <Icon icon={bitmapIcon} color="var(--bold-a)" />
     </span>
     <div slot="content">
       <ConnectWallet/>
       <!-- <Dropdown /> -->
     </div>
   </SidebarTab>
-
+  
 </div>

@@ -11,6 +11,7 @@ import BlockIcon from '../assets/icon/grid-icon.svg'
 import { fly } from 'svelte/transition'
 import { matchQuery, searchTx, searchBlockHeight, searchBlockHash } from '../utils/search.js'
 import { selectedTx, detailTx, overlay, loading, freezeResize } from '../stores.js'
+import GetAllBitmaps from './AllBitmaps.svelte'
 
 const queryIcons = {
   txid: TxIcon,
@@ -232,6 +233,7 @@ async function focusOut(e) {
 
 <div class="input-wrapper" transition:fly={{ y: -25 }}>
   <form class="search-form" action="" on:submit={searchSubmit}>
+    
     <input class="search-input" type="text" bind:value={query} placeholder="txid, block id or block height" on:focusin={focusIn} on:focusout={focusOut}>
     <div class="clear-button" class:disabled={query == null || query === ''} on:click={clearInput} title="Clear">
       <Icon icon={CrossIcon}/>
@@ -250,5 +252,10 @@ async function focusOut(e) {
   </form>
   <div class="input-icon search icon-button" on:click={searchSubmit} title="Search">
     <Icon icon={SearchIcon}/>
+  </div>
+  <br>
+  <div>
+    <GetAllBitmaps/>
+
   </div>
 </div>
